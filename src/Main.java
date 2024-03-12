@@ -1,5 +1,9 @@
+import Model.Block;
+import View.TetrisFrame;
+
 public class Main {
+
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        TetrisFrame tetrisFrame = new TetrisFrame();
     }
 }
