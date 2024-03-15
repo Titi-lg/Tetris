@@ -15,7 +15,7 @@ public class Game extends Observable implements Runnable{
     @Override
     public void run(){
         while(true){
-            tetris.moveDown();
+            //tetris.moveDown();
             tetris.getGridPlay().displayGrid();
             this.setChanged();
             this.notifyObservers();

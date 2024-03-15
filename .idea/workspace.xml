@@ -4,14 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="371887b6-ebed-41b6-b128-4ddbceaa9def" name="Changes" comment="Init View">
-      <change afterPath="$PROJECT_DIR$/src/Model/Game.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Model/GridPlay.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Model/Shape.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Model/Tetris.java" afterDir="false" />
+    <list default="true" id="371887b6-ebed-41b6-b128-4ddbceaa9def" name="Changes" comment="Update MVC">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Model/Block.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Block.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/View/TetrisCanva.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/TetrisCanva.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/GridPlay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/GridPlay.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Shape.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Shape.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Tetris.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Tetris.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/View/TetrisFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/TetrisFrame.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -27,7 +26,26 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "Titi-lg"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="7c56f666-4f45-437d-97df-c87463dab9f9" />
+        <option name="url" value="https://github.com/Titi-lg/Tetris.git" />
+      </UrlAndAccount>
+    </option>
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 0
@@ -47,7 +65,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/Timot/ProjetJava/s5-projet-apo-automate",
+    "last_opened_file_path": "C:/Users/Timot/IdeaProjects/Tetris",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -71,6 +89,7 @@
       <workItem from="1710329665239" duration="2209000" />
       <workItem from="1710421438398" duration="5971000" />
       <workItem from="1710428061461" duration="4085000" />
+      <workItem from="1710493125026" duration="1989000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <option name="closed" value="true" />
@@ -88,16 +107,48 @@
       <option name="project" value="LOCAL" />
       <updated>1710259718071</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Update MVC">
+      <option name="closed" value="true" />
+      <created>1710493316138</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1710493316138</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="main/Titi" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Init" />
     <MESSAGE value="Init View" />
-    <option name="LAST_COMMIT_MESSAGE" value="Init View" />
+    <MESSAGE value="Update MVC" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update MVC" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

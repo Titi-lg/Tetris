@@ -37,31 +37,31 @@ public class Tetris {
         int shapeNum = getRandomNumber();
         switch (shapeNum){
             case 0:
-                shape.createShape(Shape.Shapes.SQUARE,0);
+                shape.createShape(Shape.Shapes.SQUARE,2);
                 stack[1] = shape;
                 break;
             case 1:
-                shape.createShape(Shape.Shapes.LINE,0);
+                shape.createShape(Shape.Shapes.LINE,2);
                 stack[1] = shape;
                 break;
             case 2:
-                shape.createShape(Shape.Shapes.S,0);
+                shape.createShape(Shape.Shapes.S,2);
                 stack[1] = shape;
                 break;
             case 3:
-                shape.createShape(Shape.Shapes.Z,0);
+                shape.createShape(Shape.Shapes.Z,2);
                 stack[1] = shape;
                 break;
             case 4:
-                shape.createShape(Shape.Shapes.T,0);
+                shape.createShape(Shape.Shapes.T,2);
                 stack[1] = shape;
                 break;
             case 5:
-                shape.createShape(Shape.Shapes.L,0);
+                shape.createShape(Shape.Shapes.L,2);
                 stack[1] = shape;
                 break;
             case 6:
-                shape.createShape(Shape.Shapes.J,0);
+                shape.createShape(Shape.Shapes.J,2);
                 stack[1] = shape;
                 break;
         }

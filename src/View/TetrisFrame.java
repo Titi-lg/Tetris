@@ -61,12 +61,9 @@ public class TetrisFrame extends JFrame implements Observer{
         add(pLeft, BorderLayout.WEST);
         add(pSouth, BorderLayout.SOUTH);
         add(pOptions, BorderLayout.NORTH);
-
-        pack();
         setVisible(true);
-        new Thread(game::play).start();
-        game.run();
-
+        //new Thread(game::play).start();
+        //game.run();
     }
 
 

@@ -30,10 +30,10 @@ public class GridPlay {
         }
     }
     public void updateGrid(Shape shape){
-        for (int i = 0; i < shape.getGrid().length; i++) {
-            for (int j = 0; j < shape.getGrid()[i].length; j++) {
-                if (shape.getGrid()[i][j] == 1) {
-                    grid[i + shape.getX()][j + shape.getY()] = 1;
+        for (int i = 0; i < shape.getGrid().width; i++) {
+            for (int j = 0; j < shape.getGrid().height; j++) {
+                if (shape.getGrid().getNumber(i,j) == 1) {
+                    grid[shape.getX() + i][shape.getY() + j] += 1;
                 }
             }
         }
@@ -44,6 +44,10 @@ public class GridPlay {
     }
     public int getNumber(int x, int y){
         return grid[x][y];
+    }
+
+    public void setNumber(int x, int y, int value){
+        grid[x][y] = value;
     }
 
     public int getHeight() {
