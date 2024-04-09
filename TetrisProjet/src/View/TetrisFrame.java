@@ -54,6 +54,8 @@ public class TetrisFrame extends JFrame implements PropertyChangeListener {
         pOptions = new JPanel();
         pLeft = new JPanel();
         pSouth = new JPanel();
+        NextPieceCanva nextPieceCanva = new NextPieceCanva(board, board.getBrickManager());
+        pNextPiece.add(nextPieceCanva);
         pRight.add(pNextPiece);
         pRight.add(scorePanel);
         KeyPadController keyPadController = new KeyPadController(board);

@@ -1,5 +1,6 @@
 package model.bricks;
 
+import java.awt.*;
 import java.util.List;
 
 public interface Brick {

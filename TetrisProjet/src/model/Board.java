@@ -1,5 +1,6 @@
 package model;
 
+import View.NextPieceCanva;
 import model.bricks.Brick;
 import model.bricks.BrickManager;
 
@@ -25,6 +26,7 @@ public class Board implements Runnable{
         this.cols = cols;
         boardMatrix = new int[rows][cols];
         brickManager = new BrickManager();
+
     }
     public void initialisation(){
         createNewBrick();
@@ -177,6 +179,7 @@ public class Board implements Runnable{
         // Si la pièce ne peut pas se déplacer vers la droite, ne pas la déplacer
         return false;
     }
+
 }
     public void mergeBrickToBackground() {
         int[][] old = boardMatrix;
@@ -211,9 +214,16 @@ public class Board implements Runnable{
             System.out.println("Game Over");
             restartGame();
         }
+        updateNextPiece();
         checkAndClearFullRows();
     }
 }
+
+    private void updateNextPiece() {
+        Brick nextBrick = brickManager.getNextBrick();
+        pcs.firePropertyChange("NextPiece", null, nextBrick);
+    }
+
     public void restartGame() {
         boardMatrix = new int[rows][cols];
         brickManager = new BrickManager();
@@ -289,4 +299,8 @@ public class Board implements Runnable{
             }
         }
 }
+    // Retourne le brickManager pour le constructeur de NextPieceCanva
+    public BrickManager getBrickManager() {
+        return brickManager;
+    }
 }

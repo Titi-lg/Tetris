@@ -51,5 +51,9 @@ public class BrickManager {
         bricks.remove(0);
     }
 
+    public Brick getNextBrick() {
+        return bricks.get(1);
+    }
+
 
 }
