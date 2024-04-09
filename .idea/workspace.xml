@@ -5,13 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="371887b6-ebed-41b6-b128-4ddbceaa9def" name="Changes" comment="Update MVC">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Block.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Block.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/GridPlay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/GridPlay.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Shape.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Shape.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Tetris.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Tetris.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/View/TetrisFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/TetrisFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,12 +27,12 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "Titi-lg"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Titi-lg&quot;
   }
-}]]></component>
+}</component>
   <component name="GithubPullRequestsUISettings">
     <option name="selectedUrlAndAccountId">
       <UrlAndAccount>
@@ -65,11 +59,12 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/Timot/IdeaProjects/Tetris",
+    "last_opened_file_path": "C:/Users/Timot/IdeaProjects/TetrisJava/Tetris/TetrisProjet",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "preferences.pluginManager",
     "vue.rearranger.settings.migration": "true"
   }
@@ -90,6 +85,7 @@
       <workItem from="1710421438398" duration="5971000" />
       <workItem from="1710428061461" duration="4085000" />
       <workItem from="1710493125026" duration="1989000" />
+      <workItem from="1712649184816" duration="171000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <option name="closed" value="true" />

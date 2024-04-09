@@ -33,9 +33,6 @@ public class Board {
     mergeBrickToBackground();
     brickManager.NextBrick();
     boolean success = createNewBrick();
-    if (!success) {
-        return false;
-    }
     return success;
 }
     public int[][] getGrid() {
@@ -204,6 +201,7 @@ public boolean moveRight() {
     }
     public void handleMovement(String direction) {
     boolean success;
+    boolean gameOver = false;
     switch (direction) {
         case "Left":
             success = moveLeft();
@@ -224,10 +222,19 @@ public boolean moveRight() {
         mergeBrickToBackground();
         displayBoard();
     } else if (direction.equals("Down")) {
-        stopAndCreateNewBrick();
+        gameOver = stopAndCreateNewBrick();
+        if(gameOver){
+            System.out.println("Game Over");
+            restartGame();
+        }
         checkAndClearFullRows();
     }
 }
+    public void restartGame() {
+        boardMatrix = new int[rows][cols];
+        brickManager = new BrickManager();
+        createNewBrick();
+    }
     public void displayBoard() {
         // Afficher la grille de jeu
         for (int i = 0; i < rows; i++) {
