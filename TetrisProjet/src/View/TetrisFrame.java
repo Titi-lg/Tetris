@@ -12,7 +12,8 @@ public class TetrisFrame extends JFrame implements PropertyChangeListener {
     public static int hauteur=800, largeur=1000;
 
     private Board board;
-    private JPanel pJeu, pScore, pNextPiece, pOptions,pRight,pLeft,pSouth;
+    private JPanel pJeu, pNextPiece, pOptions,pRight,pLeft,pSouth;
+    private ScorePanel scorePanel;
 
     public int getHauteur() {
         return hauteur;
@@ -50,13 +51,14 @@ public class TetrisFrame extends JFrame implements PropertyChangeListener {
 
         pJeu = new JPanel(new BorderLayout());
         pRight = new JPanel(new GridLayout(2,1));
-        pScore = new JPanel();
+        scorePanel = new ScorePanel(0);
+        board.addPropertyChangeListener(scorePanel);
         pNextPiece = new JPanel();
         pOptions = new JPanel();
         pLeft = new JPanel();
         pSouth = new JPanel();
         pRight.add(pNextPiece);
-        pRight.add(pScore);
+        pRight.add(scorePanel);
         KeyPadController keyPadController = new KeyPadController(board);
         addKeyListener(keyPadController);
         setFocusable(true);

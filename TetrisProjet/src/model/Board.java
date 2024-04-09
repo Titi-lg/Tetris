@@ -13,6 +13,7 @@ public class Board {
     private BrickManager brickManager;
     private final int rows;
     private final int cols;
+    private int score = 0;
     private PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 
     private Point point;
@@ -75,9 +76,15 @@ public class Board {
         return false;
     }
 }
+   public void updateScore() {
+    int oldScore = this.score;
+    this.score += 10;
+    pcs.firePropertyChange("Score", oldScore, this.score);
+}
 public void checkAndClearFullRows() {
     for (int i = rows - 1; i >= 0; i--) {
         if (isRowFull(i)) {
+            updateScore();
             deleteRow(i);
             moveRowsDown(i);
             i++; // Recheck the current row as it now contains the row that was above it

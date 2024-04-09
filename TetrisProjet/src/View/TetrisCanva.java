@@ -62,7 +62,6 @@ public class TetrisCanva extends JPanel implements PropertyChangeListener {
 
     @Override
     public void propertyChange(PropertyChangeEvent e) {
-        System.out.println("propertyChange");
         if (e.getPropertyName().equals("NewMove")) {
             updateGrid((int[][]) e.getNewValue());
         }
