@@ -1,13 +1,11 @@
 package View;
-import Controller.DownController;
+import Controller.KeyPadController;
 import model.Board;
 
 import javax.swing.*;
 import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.Observable;
-import java.util.Observer;
 
 public class TetrisFrame extends JFrame implements PropertyChangeListener {
     //private TetrisCanva tetrisCanva;
@@ -59,8 +57,8 @@ public class TetrisFrame extends JFrame implements PropertyChangeListener {
         pSouth = new JPanel();
         pRight.add(pNextPiece);
         pRight.add(pScore);
-        DownController downController = new DownController(board);
-        addKeyListener(downController);
+        KeyPadController keyPadController = new KeyPadController(board);
+        addKeyListener(keyPadController);
         setFocusable(true);
         TetrisCanva tetrisCanva = new TetrisCanva(board);
         board.addPropertyChangeListener(tetrisCanva);

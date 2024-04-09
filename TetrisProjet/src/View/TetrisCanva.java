@@ -27,10 +27,31 @@ public class TetrisCanva extends JPanel implements PropertyChangeListener {
         super.paintComponent(g);
         for (int i = 0; i < ROWS; i++) {
             for (int j = 0; j < COLS; j++) {
-                if (grid[i][j] == 0) {
-                    g.setColor(Color.WHITE);
-                } else {
-                    g.setColor(Color.BLACK);
+                switch (grid[i][j]) {
+                    case 0:
+                        g.setColor(Color.WHITE);
+                        break;
+                    case 1:
+                        g.setColor(Color.CYAN);
+                        break;
+                    case 2:
+                        g.setColor(Color.BLUE);
+                        break;
+                    case 3:
+                        g.setColor(Color.ORANGE);
+                        break;
+                    case 4:
+                        g.setColor(Color.YELLOW);
+                        break;
+                    case 5:
+                        g.setColor(Color.GREEN);
+                        break;
+                    case 6:
+                        g.setColor(Color.MAGENTA);
+                        break;
+                    case 7:
+                        g.setColor(Color.RED);
+                        break;
                 }
                 g.fillRect(j * BLOCK_SIZE, i * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
                 g.setColor(Color.GRAY);
