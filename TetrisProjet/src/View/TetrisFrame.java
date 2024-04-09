@@ -36,13 +36,10 @@ public class TetrisFrame extends JFrame implements PropertyChangeListener {
     //}
 
 
-    public TetrisFrame(Board board) {
-        this.board = board;
+    public TetrisFrame() {
+        board = new Board(20, 10);
         board.addPropertyChangeListener(this);
-       // Game game = new Game();
-       // tetrisCanva = new TetrisCanva(game.getTetris());
-       // game.addObserver(this);
-       // game.play();
+        board.initialisation();
 
         setTitle("Tetris");
         setSize(largeur+200, hauteur+200);
@@ -71,8 +68,9 @@ public class TetrisFrame extends JFrame implements PropertyChangeListener {
         add(pSouth, BorderLayout.SOUTH);
         add(pOptions, BorderLayout.NORTH);
         setVisible(true);
-        //new Thread(game::play).start();
-        //game.run();
+        Thread thread = new Thread(board);
+        thread.start();
+
     }
     public void propertyChange(PropertyChangeEvent event) {
     }

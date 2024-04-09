@@ -8,7 +8,9 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.Arrays;
 
-public class Board {
+import static java.lang.Thread.sleep;
+
+public class Board implements Runnable{
     private int[][] boardMatrix;
     private BrickManager brickManager;
     private final int rows;
@@ -24,7 +26,11 @@ public class Board {
         boardMatrix = new int[rows][cols];
         brickManager = new BrickManager();
     }
-
+    public void initialisation(){
+        createNewBrick();
+        mergeBrickToBackground();
+        displayBoard();
+    }
     public boolean createNewBrick() {
         Brick currentBrick = brickManager.getBrick();
         point = new Point(4, 0);
@@ -40,7 +46,7 @@ public class Board {
         return boardMatrix;
     }
 
-   public boolean moveDown() {
+    public boolean moveDown() {
     int[][] brickMatrix = brickManager.getBrick().getShapeMatrix(brickManager.getBrick().getNumberOfRotation());
     int brickX = (int) point.getX();
     int brickY = (int) point.getY();
@@ -76,86 +82,86 @@ public class Board {
         return false;
     }
 }
-   public void updateScore() {
+    public void updateScore() {
     int oldScore = this.score;
     this.score += 10;
     pcs.firePropertyChange("Score", oldScore, this.score);
 }
-public void checkAndClearFullRows() {
-    for (int i = rows - 1; i >= 0; i--) {
-        if (isRowFull(i)) {
-            updateScore();
-            deleteRow(i);
-            moveRowsDown(i);
-            i++; // Recheck the current row as it now contains the row that was above it
+    public void checkAndClearFullRows() {
+        for (int i = rows - 1; i >= 0; i--) {
+            if (isRowFull(i)) {
+                updateScore();
+                deleteRow(i);
+                moveRowsDown(i);
+                i++; // Recheck the current row as it now contains the row that was above it
+            }
         }
     }
-}
 
-private boolean isRowFull(int row) {
-    for (int j = 0; j < cols; j++) {
-        if (boardMatrix[row][j] == 0) {
-            return false;
+    private boolean isRowFull(int row) {
+        for (int j = 0; j < cols; j++) {
+            if (boardMatrix[row][j] == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private void deleteRow(int row) {
+        Arrays.fill(boardMatrix[row], 0);
+    }
+
+    private void moveRowsDown(int startRow) {
+        for (int i = startRow; i > 0; i--) {
+            System.arraycopy(boardMatrix[i - 1], 0, boardMatrix[i], 0, cols);
         }
     }
-    return true;
-}
-
-private void deleteRow(int row) {
-    Arrays.fill(boardMatrix[row], 0);
-}
-
-private void moveRowsDown(int startRow) {
-    for (int i = startRow; i > 0; i--) {
-        System.arraycopy(boardMatrix[i - 1], 0, boardMatrix[i], 0, cols);
-    }
-}
 
     public boolean rotation() {
-        int[][] brickMatrix = brickManager.getBrick().getShapeMatrix(brickManager.getBrick().getNumberOfRotation());
-        int[][] old = brickMatrix;
-        int brickX = (int) point.getX();
-        int brickY = (int) point.getY();
+            int[][] brickMatrix = brickManager.getBrick().getShapeMatrix(brickManager.getBrick().getNumberOfRotation());
+            int[][] old = brickMatrix;
+            int brickX = (int) point.getX();
+            int brickY = (int) point.getY();
 
-        // Effacer la pièce de sa position actuelle dans la grille
-        for (int i = 0; i < brickMatrix.length; i++) {
-            for (int j = 0; j < brickMatrix[i].length; j++) {
-                if (brickMatrix[i][j] != 0) {
-                    if (brickY + i < boardMatrix.length && brickX + j < boardMatrix[0].length) {
-                        boardMatrix[brickY + i][brickX + j] = 0;
+            // Effacer la pièce de sa position actuelle dans la grille
+            for (int i = 0; i < brickMatrix.length; i++) {
+                for (int j = 0; j < brickMatrix[i].length; j++) {
+                    if (brickMatrix[i][j] != 0) {
+                        if (brickY + i < boardMatrix.length && brickX + j < boardMatrix[0].length) {
+                            boardMatrix[brickY + i][brickX + j] = 0;
+                        }
                     }
                 }
             }
-        }
-        brickMatrix = brickManager.getBrick().getShapeMatrix(brickManager.getBrick().nextRotationIndex());
+            brickMatrix = brickManager.getBrick().getShapeMatrix(brickManager.getBrick().nextRotationIndex());
 
-        if (!TabOperation.intersect(boardMatrix, brickMatrix, brickX, brickY)) {
-            brickManager.getBrick().setRotationIndex(brickManager.getBrick().nextRotationIndex());
+            if (!TabOperation.intersect(boardMatrix, brickMatrix, brickX, brickY)) {
+                brickManager.getBrick().setRotationIndex(brickManager.getBrick().nextRotationIndex());
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+    public boolean moveLeft() {
+        int[][] brickMatrix = brickManager.getBrick().getShapeMatrix(brickManager.getBrick().getNumberOfRotation());
+        int brickX = (int) point.getX();
+        int brickY = (int) point.getY();
+        deletePosition(brickX,brickY,brickMatrix);
+
+        // Vérifier si la pièce peut se déplacer vers la gauche
+        if (!TabOperation.intersect(boardMatrix, brickMatrix, brickX - 1, brickY)) {
+            // Si la pièce peut se déplacer vers la gauche, la déplacer
+            point.translate(-1, 0);
+            horizontalMove(brickX,brickY,brickMatrix);
             return true;
         } else {
+            // Si la pièce ne peut pas se déplacer vers la gauche, ne pas la déplacer
             return false;
         }
     }
 
-public boolean moveLeft() {
-    int[][] brickMatrix = brickManager.getBrick().getShapeMatrix(brickManager.getBrick().getNumberOfRotation());
-    int brickX = (int) point.getX();
-    int brickY = (int) point.getY();
-    deletePosition(brickX,brickY,brickMatrix);
-
-    // Vérifier si la pièce peut se déplacer vers la gauche
-    if (!TabOperation.intersect(boardMatrix, brickMatrix, brickX - 1, brickY)) {
-        // Si la pièce peut se déplacer vers la gauche, la déplacer
-        point.translate(-1, 0);
-        horizontalMove(brickX,brickY,brickMatrix);
-        return true;
-    } else {
-        // Si la pièce ne peut pas se déplacer vers la gauche, ne pas la déplacer
-        return false;
-    }
-}
-
-public boolean moveRight() {
+    public boolean moveRight() {
     int[][] brickMatrix = brickManager.getBrick().getShapeMatrix(brickManager.getBrick().getNumberOfRotation());
     int brickX = (int) point.getX();
     int brickY = (int) point.getY();
@@ -211,6 +217,7 @@ public boolean moveRight() {
     public void restartGame() {
         boardMatrix = new int[rows][cols];
         brickManager = new BrickManager();
+        score = 0;
         createNewBrick();
     }
     public void displayBoard() {
@@ -266,4 +273,20 @@ public boolean moveRight() {
             }
         }
     }
+
+    /**
+     * Runs this operation.
+     */
+    @Override
+    public void run() {
+        while (true) {
+            try {
+                handleMovement("Down");
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                // Gérer l'interruption ici, par exemple en rétablissant le statut d'interruption
+                Thread.currentThread().interrupt();
+            }
+        }
+}
 }
