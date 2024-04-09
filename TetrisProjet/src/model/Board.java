@@ -46,15 +46,10 @@ public class Board {
        if (TabOperation.checkLimit(boardMatrix, brickManager.getBrick().getShapeMatrix(brickManager.getBrick().getNumberOfRotation()), (int) point.getX(), (int) point.getY())) {
            return false;
        }
+       // Effacer la pièce de sa position actuelle dans la grille
+    deletePosition(brickX,brickY,brickMatrix);
 
-    // Effacer la pièce de sa position actuelle dans la grille
-    for (int i = 0; i < brickMatrix.length; i++) {
-        for (int j = 0; j < brickMatrix[i].length; j++) {
-            if (brickMatrix[i][j] != 0) {
-                boardMatrix[brickY + i][brickX + j] = 0;
-            }
-        }
-    }
+
 
     // Vérifier si la pièce peut se déplacer vers le bas
     if (!TabOperation.intersect(boardMatrix, brickMatrix, brickX, brickY + 1)) {
@@ -139,25 +134,13 @@ public boolean moveLeft() {
     int[][] brickMatrix = brickManager.getBrick().getShapeMatrix(brickManager.getBrick().getNumberOfRotation());
     int brickX = (int) point.getX();
     int brickY = (int) point.getY();
-    for (int i = 0; i < brickMatrix.length; i++) {
-        for (int j = 0; j < brickMatrix[i].length; j++) {
-            if (brickMatrix[i][j] != 0) {
-                boardMatrix[brickY + i][brickX + j] = 0;
-            }
-        }
-    }
+    deletePosition(brickX,brickY,brickMatrix);
 
     // Vérifier si la pièce peut se déplacer vers la gauche
     if (!TabOperation.intersect(boardMatrix, brickMatrix, brickX - 1, brickY)) {
         // Si la pièce peut se déplacer vers la gauche, la déplacer
         point.translate(-1, 0);
-        for (int i = 0; i < brickMatrix.length; i++) {
-            for (int j = 0; j < brickMatrix[i].length; j++) {
-                if (brickMatrix[i][j] != 0) {
-                    boardMatrix[brickY + i][brickX + j] = 0;
-                }
-            }
-        }
+        horizontalMove(brickX,brickY,brickMatrix);
         return true;
     } else {
         // Si la pièce ne peut pas se déplacer vers la gauche, ne pas la déplacer
@@ -169,25 +152,13 @@ public boolean moveRight() {
     int[][] brickMatrix = brickManager.getBrick().getShapeMatrix(brickManager.getBrick().getNumberOfRotation());
     int brickX = (int) point.getX();
     int brickY = (int) point.getY();
-    for (int i = 0; i < brickMatrix.length; i++) {
-        for (int j = 0; j < brickMatrix[i].length; j++) {
-            if (brickMatrix[i][j] != 0) {
-                boardMatrix[brickY + i][brickX + j] = 0;
-            }
-        }
-    }
+    deletePosition(brickX,brickY,brickMatrix);
 
     // Vérifier si la pièce peut se déplacer vers la droite
     if (!TabOperation.intersect(boardMatrix, brickMatrix, brickX + 1, brickY)) {
         // Si la pièce peut se déplacer vers la droite, la déplacer
         point.translate(1, 0);
-        for (int i = 0; i < brickMatrix.length; i++) {
-            for (int j = 0; j < brickMatrix[i].length; j++) {
-                if (brickMatrix[i][j] != 0) {
-                    boardMatrix[brickY + i][brickX + j] = 0;
-                }
-            }
-        }
+        horizontalMove(brickX,brickY,brickMatrix);
         return true;
     } else {
         // Si la pièce ne peut pas se déplacer vers la droite, ne pas la déplacer
@@ -267,5 +238,25 @@ public boolean moveRight() {
 
     public PropertyChangeListener[] getPropertyChangeListeners(String propertyName) {
         return pcs.getPropertyChangeListeners(propertyName);
+    }
+
+    public void deletePosition(int x,int y,int[][] brickMatrix){
+        for (int i = 0; i < brickMatrix.length; i++) {
+            for (int j = 0; j < brickMatrix[i].length; j++) {
+                if (brickMatrix[i][j] != 0) {
+                    boardMatrix[y + i][x + j] = 0;
+                }
+            }
+        }
+    }
+
+    public void horizontalMove(int x,int y,int[][] brickMatrix){
+        for (int i = 0; i < brickMatrix.length; i++) {
+            for (int j = 0; j < brickMatrix[i].length; j++) {
+                if (brickMatrix[i][j] != 0) {
+                    boardMatrix[y + i][x + j] = 0;
+                }
+            }
+        }
     }
 }
