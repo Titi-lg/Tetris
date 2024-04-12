@@ -1,6 +1,7 @@
 package model;
 
 import View.NextPieceCanva;
+import View.Themes;
 import model.bricks.Brick;
 import model.bricks.BrickManager;
 
