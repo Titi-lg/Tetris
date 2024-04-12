@@ -29,10 +29,16 @@ public class Board implements Runnable{
 
     }
     public void initialisation(){
-        createNewBrick();
+        /*createNewBrick();
         mergeBrickToBackground();
-        displayBoard();
+        displayBoard();*/
+        restartGame();
     }
+
+    public PropertyChangeSupport getPcs() {
+        return pcs;
+    }
+
     public boolean createNewBrick() {
         Brick currentBrick = brickManager.getBrick();
         point = new Point(4, 0);
