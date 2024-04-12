@@ -90,12 +90,15 @@ public class TetrisFrame extends JFrame implements PropertyChangeListener {
         setVisible(true);
         thread = new Thread(board);
         thread.start();
+        Themes mainThemes = new Themes("src/assets/maintheme.wav");
+        mainThemes.playMusic();
         board2 = new Board(20, 10);
         board2.addPropertyChangeListener(this);
         board2.initialisation();
         thread2 = new Thread(board2);
         thread2.start();
         board2.setToSleep(true);
+
 
     }
     public void propertyChange(PropertyChangeEvent event) {
