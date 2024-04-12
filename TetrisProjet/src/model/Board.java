@@ -21,6 +21,8 @@ public class Board implements Runnable{
 
     private Point point;
 
+    private  boolean working=false;
+
     public Board(int rows, int cols) {
         this.rows = rows;
         this.cols = cols;
@@ -220,7 +222,6 @@ public class Board implements Runnable{
     }
     if (success) {
         mergeBrickToBackground();
-        displayBoard();
     } else if (direction.equals("Down")) {
         gameOver = stopAndCreateNewBrick();
         if(gameOver){
@@ -303,9 +304,28 @@ public class Board implements Runnable{
     /**
      * Runs this operation.
      */
+
+    private boolean toSleep = false;
+    public void setToSleep(boolean toSleep) {
+        synchronized (this) {
+            this.toSleep = toSleep;
+            if (!toSleep) {
+                notifyAll(); // Réveiller tous les threads qui attendent sur cet objet
+            }
+        }
+    }
     @Override
     public void run() {
         while (true) {
+                synchronized (this) {
+                    while (toSleep) { // Attendre tant que toSleep est vrai
+                        try {
+                            wait();
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                }
             try {
                 int timetodown;
                 handleMovement("Down");

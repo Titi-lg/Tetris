@@ -90,6 +90,12 @@ public class TetrisFrame extends JFrame implements PropertyChangeListener {
         setVisible(true);
         thread = new Thread(board);
         thread.start();
+        board2 = new Board(20, 10);
+        board2.addPropertyChangeListener(this);
+        board2.initialisation();
+        thread2 = new Thread(board2);
+        thread2.start();
+        board2.setToSleep(true);
 
     }
     public void propertyChange(PropertyChangeEvent event) {
@@ -104,10 +110,9 @@ public class TetrisFrame extends JFrame implements PropertyChangeListener {
             }
         }*/
         if (event.getPropertyName().equals("addJoueur")) {
-            board2 = new Board(20, 10);
-            board2.addPropertyChangeListener(this);
-            board2.initialisation();
+            board2.setToSleep(false);
             board.initialisation();
+            board2.initialisation();
 
             tetrisCanva2 = new TetrisCanva(board2);
             board2.addPropertyChangeListener(tetrisCanva2);
@@ -124,24 +129,20 @@ public class TetrisFrame extends JFrame implements PropertyChangeListener {
             pJeu2.add(tetrisCanva2, BorderLayout.CENTER);
             add(pJeu2, BorderLayout.WEST);
             pJeu2.add(pRight2, BorderLayout.EAST);
-            pack();
             keyPadController.setBoard2(board2);
-            thread2 = new Thread(board2);
-            thread2.start();
-            thread.start();
+            pack();
         }
         if (event.getPropertyName().equals("Cancel")) {
-            if (board2 != null) {
+                board2.setToSleep(true);
                 pJeu2.remove(pRight2);
                 pJeu2.remove(tetrisCanva2);
                 pLeft.remove(tetrisCanva2);
                 pJeu2.remove(pNextPeice2);
                 pJeu2.remove(pRight2);
                 pJeu2.remove(pJeu2);
-                board2 = null;
                 keyPadController.setBoard2(null);
-                thread2.interrupt();
-            }
+                pack();
+                board.initialisation();
         }
     }
 
