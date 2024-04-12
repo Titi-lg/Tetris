@@ -9,7 +9,7 @@ import java.beans.PropertyChangeListener;
 
 public class TetrisFrame extends JFrame implements PropertyChangeListener {
     //private TetrisCanva tetrisCanva;
-    public static int hauteur=800, largeur=1000;
+    public static int hauteur=800, largeur=500;
 
     private Board board;
     private JPanel pJeu, pNextPiece, pOptions,pRight,pLeft,pSouth;

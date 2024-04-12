@@ -9,25 +9,35 @@ import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+/**
+ * Cette classe est utiliser pour afficher les prochaines pièces.
+ */
 public class NextPieceCanva extends JPanel implements PropertyChangeListener {
     private static final int BLOCK_SIZE = 30;
     private static final int ROWS = 4;
     private static final int COLS = 4;
-    private int[][] grid;
     private Board board;
 
     private Brick nextBrick;
     private BrickManager brickManager;
 
+    /**
+     * Constructeur de la classe NextPieceCanva
+     * @param board
+     * @param brickManager
+     */
     public NextPieceCanva(Board board, BrickManager brickManager) {
         this.board = board;
         this.brickManager = brickManager;
-        this.grid = board.getGrid();
         board.addPropertyChangeListener(this);
         this.setPreferredSize(new Dimension(COLS * BLOCK_SIZE, ROWS * BLOCK_SIZE));
         this.nextBrick = brickManager.getNextBrick();
     }
 
+    /**
+     * Cette méthode permet de mettre à jour la prochaine pièce
+     * @param e
+     */
     @Override
     public void propertyChange(PropertyChangeEvent e) {
         if (e.getPropertyName().equals("NextPiece")) {
@@ -36,7 +46,10 @@ public class NextPieceCanva extends JPanel implements PropertyChangeListener {
         }
     }
 
-
+    /**
+     * Cette méthode permet de dessiner la prochaine pièce
+     * @param g the <code>Graphics</code> object to protect
+     */
     @Override
 protected void paintComponent(Graphics g) {
     super.paintComponent(g);
@@ -80,8 +93,4 @@ protected void paintComponent(Graphics g) {
     }
 }
 
-    public void updateGrid(int[][] newGrid) {
-        this.grid = newGrid;
-        repaint();
-    }
 }

@@ -84,19 +84,22 @@ public class Board implements Runnable{
         return false;
     }
 }
-    public void updateScore() {
+    public void updateScore(int r) {
     int oldScore = this.score;
-    this.score += 10;
+    this.score += 10*r;
     pcs.firePropertyChange("Score", oldScore, this.score);
 }
     public void checkAndClearFullRows() {
+        int multiple=1;
         for (int i = rows - 1; i >= 0; i--) {
             if (isRowFull(i)) {
-                updateScore();
+                updateScore(multiple);
                 deleteRow(i);
                 moveRowsDown(i);
-                i++; // Recheck the current row as it now contains the row that was above it
+                i++;
+                multiple ++;// Recheck the current row as it now contains the row that was above it
             }
+
         }
     }
 
@@ -213,6 +216,7 @@ public class Board implements Runnable{
         if(gameOver){
             System.out.println("Game Over");
             restartGame();
+
         }
         updateNextPiece();
         checkAndClearFullRows();
@@ -228,6 +232,7 @@ public class Board implements Runnable{
         boardMatrix = new int[rows][cols];
         brickManager = new BrickManager();
         score = 0;
+        updateScore(score);
         createNewBrick();
     }
     public void displayBoard() {
