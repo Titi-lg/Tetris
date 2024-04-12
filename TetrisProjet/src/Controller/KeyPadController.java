@@ -65,6 +65,9 @@ public class KeyPadController extends KeyAdapter {
         if (e.getKeyCode() == KeyEvent.VK_P) {
             board.getPcs().firePropertyChange("addJoueur", null, null);
         }
+        if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            board.getPcs().firePropertyChange("Cancel", null, null);
+        }
     }
 }
 
