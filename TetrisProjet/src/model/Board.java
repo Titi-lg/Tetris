@@ -91,13 +91,17 @@ public class Board implements Runnable{
 }
     public void checkAndClearFullRows() {
         int multiple=1;
+        int coef=1;
         for (int i = rows - 1; i >= 0; i--) {
             if (isRowFull(i)) {
                 updateScore(multiple);
                 deleteRow(i);
                 moveRowsDown(i);
                 i++;
-                multiple ++;// Recheck the current row as it now contains the row that was above it
+                coef++;
+                multiple++;
+                multiple*=coef;
+                // Recheck the current row as it now contains the row that was above it
             }
 
         }
