@@ -1,15 +1,20 @@
 package View;
 import Controller.KeyPadController;
 import model.Board;
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
+import java.io.IOException;
 
 import javax.swing.*;
 import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.File;
 
 public class TetrisFrame extends JFrame implements PropertyChangeListener {
     //private TetrisCanva tetrisCanva;
     public static int hauteur=800, largeur=500;
+    private JButton pauseButton;
 
     private Board board;
     private JPanel pJeu, pNextPiece, pOptions,pRight,pLeft,pSouth;
@@ -45,6 +50,11 @@ public class TetrisFrame extends JFrame implements PropertyChangeListener {
         setSize(largeur+200, hauteur+200);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
+        pauseButton = new JButton(new ImageIcon(this.getClass().getResource("/assets/Pause.jpg")));
+        pauseButton.setBorderPainted(false); // Remove the button border
+        pauseButton.setFocusPainted(false); // Remove focus border
+        pauseButton.setContentAreaFilled(false); // Make the button transparent
+        pauseButton.setPreferredSize(new Dimension(100, 50));
 
         pJeu = new JPanel(new BorderLayout());
         pRight = new JPanel(new GridLayout(2,1));

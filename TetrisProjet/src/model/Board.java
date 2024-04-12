@@ -229,10 +229,11 @@ public class Board implements Runnable{
     }
 
     public void restartGame() {
+        int oldScore = this.score;
         boardMatrix = new int[rows][cols];
         brickManager = new BrickManager();
-        score = 0;
-        updateScore(score);
+        this.score = 0;
+        pcs.firePropertyChange("Score", oldScore, this.score);
         createNewBrick();
     }
     public void displayBoard() {
