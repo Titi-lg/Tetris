@@ -226,6 +226,8 @@ public class Board implements Runnable{
         gameOver = stopAndCreateNewBrick();
         if(gameOver){
             System.out.println("Game Over");
+            Themes soundGameOver = new Themes("src/assets/gameover.wav");
+            soundGameOver.playMusic();
             restartGame();
 
         }
