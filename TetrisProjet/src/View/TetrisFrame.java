@@ -18,11 +18,15 @@ public class TetrisFrame extends JFrame implements PropertyChangeListener {
 
     private Board board;
     private Board board2;
-    private JPanel pJeu, pNextPiece, pOptions,pRight,pLeft,pSouth;
-    private ScorePanel scorePanel;
+    private JPanel pJeu, pNextPiece, pOptions,pRight,pLeft,pSouth,pNextPeice2,pJeu2,pRight2;
+    private ScorePanel scorePanel, scorePanel2;
     private Thread thread;
     private Thread thread2;
     private KeyPadController keyPadController;
+    private TetrisCanva tetrisCanva2 ,tetrisCanva;
+
+    private NextPieceCanva nextPieceCanva;
+    private NextPieceCanva nextPieceCanva2;
 
     public int getHauteur() {
         return hauteur;
@@ -68,18 +72,18 @@ public class TetrisFrame extends JFrame implements PropertyChangeListener {
         pOptions = new JPanel();
         pLeft = new JPanel();
         pSouth = new JPanel();
-        NextPieceCanva nextPieceCanva = new NextPieceCanva(board, board.getBrickManager());
+        nextPieceCanva = new NextPieceCanva(board, board.getBrickManager());
         pNextPiece.add(nextPieceCanva);
         pRight.add(pNextPiece);
         pRight.add(scorePanel);
         keyPadController = new KeyPadController(board,board2);
         addKeyListener(keyPadController);
         setFocusable(true);
-        TetrisCanva tetrisCanva = new TetrisCanva(board);
+        tetrisCanva = new TetrisCanva(board);
         board.addPropertyChangeListener(tetrisCanva);
         pJeu.add(tetrisCanva, BorderLayout.CENTER);
         add(pJeu, BorderLayout.CENTER);
-        add(pRight, BorderLayout.EAST);
+        pJeu.add(pRight, BorderLayout.EAST);
         add(pLeft, BorderLayout.WEST);
         add(pSouth, BorderLayout.SOUTH);
         add(pOptions, BorderLayout.NORTH);
@@ -105,14 +109,39 @@ public class TetrisFrame extends JFrame implements PropertyChangeListener {
             board2.initialisation();
             board.initialisation();
 
-            TetrisCanva tetrisCanva2 = new TetrisCanva(board2);
+            tetrisCanva2 = new TetrisCanva(board2);
             board2.addPropertyChangeListener(tetrisCanva2);
             pLeft.add(tetrisCanva2);
+            nextPieceCanva2 = new NextPieceCanva(board2, board2.getBrickManager());
+            pNextPeice2 = new JPanel();
+            pJeu2 = new JPanel(new BorderLayout());
+            pRight2 = new JPanel(new GridLayout(2, 1));
+            scorePanel2 = new ScorePanel(0);
+            board2.addPropertyChangeListener(scorePanel2);
+            pNextPeice2.add(nextPieceCanva2);
+            pRight2.add(pNextPeice2);
+            pRight2.add(scorePanel2);
+            pJeu2.add(tetrisCanva2, BorderLayout.CENTER);
+            add(pJeu2, BorderLayout.WEST);
+            pJeu2.add(pRight2, BorderLayout.EAST);
             pack();
             keyPadController.setBoard2(board2);
             thread2 = new Thread(board2);
             thread2.start();
             thread.start();
+        }
+        if (event.getPropertyName().equals("Cancel")) {
+            if (board2 != null) {
+                pJeu2.remove(pRight2);
+                pJeu2.remove(tetrisCanva2);
+                pLeft.remove(tetrisCanva2);
+                pJeu2.remove(pNextPeice2);
+                pJeu2.remove(pRight2);
+                pJeu2.remove(pJeu2);
+                board2 = null;
+                keyPadController.setBoard2(null);
+                thread2.interrupt();
+            }
         }
     }
 
