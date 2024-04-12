@@ -309,12 +309,12 @@ public class Board implements Runnable{
             try {
                 int timetodown;
                 handleMovement("Down");
-                if (this.score >= 250){
-                    timetodown = 100;
-                } else if (this.score >= 200) {
+                if (this.score >= 500){
                     timetodown = 150;
-                } else if (this.score >= 150) {
+                } else if (this.score >= 200) {
                     timetodown = 200;
+                } else if (this.score >= 150) {
+                    timetodown = 250;
                 } else if (this.score >= 100) {
                     timetodown = 300;
                 } else if (this.score >= 50) {
