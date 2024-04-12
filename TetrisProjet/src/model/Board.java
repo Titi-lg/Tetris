@@ -301,8 +301,22 @@ public class Board implements Runnable{
     public void run() {
         while (true) {
             try {
+                int timetodown;
                 handleMovement("Down");
-                Thread.sleep(500);
+                if (this.score >= 250){
+                    timetodown = 100;
+                } else if (this.score >= 200) {
+                    timetodown = 150;
+                } else if (this.score >= 150) {
+                    timetodown = 200;
+                } else if (this.score >= 100) {
+                    timetodown = 300;
+                } else if (this.score >= 50) {
+                    timetodown = 400;
+                } else {
+                    timetodown = 500;
+                }
+                sleep(timetodown);
             } catch (InterruptedException e) {
                 // Gérer l'interruption ici, par exemple en rétablissant le statut d'interruption
                 Thread.currentThread().interrupt();
