@@ -371,4 +371,8 @@ public class Board implements Runnable{
     public String getScore() {
         return String.valueOf(score);
     }
+
+    public int getScoreInt() {
+        return score;
+    }
 }
