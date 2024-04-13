@@ -31,12 +31,6 @@ public class Board implements Runnable{
         brickManager = new BrickManager();
 
     }
-    public void initialisation(){
-        /*createNewBrick();
-        mergeBrickToBackground();
-        displayBoard();*/
-        restartGame();
-    }
 
     public PropertyChangeSupport getPcs() {
         return pcs;
@@ -246,9 +240,10 @@ public class Board implements Runnable{
         brickManager = new BrickManager();
         this.score = 0;
         pcs.firePropertyChange("Score", oldScore, this.score);
+
         createNewBrick();
     }
-    public void displayBoard() {
+    /*public void displayBoard() {
         // Afficher la grille de jeu
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
@@ -258,7 +253,7 @@ public class Board implements Runnable{
         }
         System.out.println("_________________________");
 
-    }
+    }*/
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         pcs.addPropertyChangeListener(listener);
     }
