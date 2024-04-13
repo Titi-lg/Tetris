@@ -13,8 +13,6 @@ import java.util.Arrays;
 import static java.lang.Thread.sleep;
 
 public class Board implements Runnable{
-
-    public Boolean end=false;
     private int[][] boardMatrix;
     private BrickManager brickManager;
     private final int rows;
@@ -24,7 +22,7 @@ public class Board implements Runnable{
 
     private Point point;
 
-    private  boolean working=false;
+    private  boolean gameOver=false;
 
     public Board(int rows, int cols) {
         this.rows = rows;
@@ -200,7 +198,9 @@ public class Board implements Runnable{
     }
     public void handleMovement(String direction) {
     boolean success;
-    boolean gameOver = false;
+    if (gameOver) {
+        return;
+    }
     switch (direction) {
         case "Left":
             success = moveLeft();
@@ -222,8 +222,7 @@ public class Board implements Runnable{
     } else if (direction.equals("Down")) {
         gameOver = stopAndCreateNewBrick();
         if(gameOver){
-            end=true;
-            gameEnd();
+            gameEnd(gameOver());
         }
         updateNextPiece();
         checkAndClearFullRows();
@@ -236,12 +235,12 @@ public class Board implements Runnable{
     }
 
     public void restartGame() {
+        gameOver = false;
         int oldScore = this.score;
         boardMatrix = new int[rows][cols];
         brickManager = new BrickManager();
         this.score = 0;
         pcs.firePropertyChange("Score", oldScore, this.score);
-
         createNewBrick();
     }
     /*public void displayBoard() {
@@ -360,21 +359,16 @@ public class Board implements Runnable{
         setToSleep(false);
     }
 
-    public void gameEnd() {
+    public void gameEnd(Boolean gameOver) {
         pcs.firePropertyChange("GameOver", null, null);
         System.out.println("Game Over");
         restartGame();
     }
+    public Boolean gameOver() {
+        return true;
+    }
 
     public String getScore() {
         return String.valueOf(score);
-    }
-
-    public Integer getScoreInt() {
-        return score;
-    }
-
-    public boolean gameOver(){
-        return end;
     }
 }
