@@ -22,7 +22,7 @@ public class Board implements Runnable{
 
     private Point point;
 
-    private  boolean working=false;
+    private  boolean gameOver=false;
 
     public Board(int rows, int cols) {
         this.rows = rows;
@@ -198,7 +198,9 @@ public class Board implements Runnable{
     }
     public void handleMovement(String direction) {
     boolean success;
-    boolean gameOver = false;
+    if (gameOver) {
+        return;
+    }
     switch (direction) {
         case "Left":
             success = moveLeft();
@@ -221,8 +223,6 @@ public class Board implements Runnable{
         gameOver = stopAndCreateNewBrick();
         if(gameOver){
             gameEnd(gameOver());
-
-
         }
         updateNextPiece();
         checkAndClearFullRows();
@@ -235,12 +235,12 @@ public class Board implements Runnable{
     }
 
     public void restartGame() {
+        gameOver = false;
         int oldScore = this.score;
         boardMatrix = new int[rows][cols];
         brickManager = new BrickManager();
         this.score = 0;
         pcs.firePropertyChange("Score", oldScore, this.score);
-
         createNewBrick();
     }
     /*public void displayBoard() {
@@ -361,7 +361,6 @@ public class Board implements Runnable{
 
     public void gameEnd(Boolean gameOver) {
         pcs.firePropertyChange("GameOver", null, null);
-        this.gameOver();
         System.out.println("Game Over");
         restartGame();
     }

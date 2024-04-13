@@ -10,6 +10,7 @@ import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
+import java.net.URL;
 
 public class TetrisFrame extends JFrame implements PropertyChangeListener {
     //private TetrisCanva tetrisCanva;
@@ -30,6 +31,7 @@ public class TetrisFrame extends JFrame implements PropertyChangeListener {
 
     private NextPieceCanva nextPieceCanva;
     private NextPieceCanva nextPieceCanva2;
+    private BufferedImage backgroundImage;
 
     public int getHauteur() {
         return hauteur;
@@ -167,6 +169,7 @@ public class TetrisFrame extends JFrame implements PropertyChangeListener {
         }
 
     }
+
 
 
 }
