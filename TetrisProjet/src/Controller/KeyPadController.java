@@ -68,6 +68,10 @@ public class KeyPadController extends KeyAdapter {
         if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
             board.getPcs().firePropertyChange("Cancel", null, null);
         }
+
+        if(e.getKeyCode()==KeyEvent.VK_B){
+            board.getPcs().firePropertyChange("Pause",null,null);
+        }
     }
 }
 

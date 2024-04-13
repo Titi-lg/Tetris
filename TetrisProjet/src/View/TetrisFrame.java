@@ -56,6 +56,8 @@ public class TetrisFrame extends JFrame implements PropertyChangeListener {
         board = new Board(20, 10);
         board.addPropertyChangeListener(this);
         board.initialisation();
+        board2= new Board(20,10); //new Board(20, 10
+        board2.addPropertyChangeListener(this);
         mainTheme = new Themes("src/assets/maintheme.wav");
         mainTheme.loopMusic();
 
@@ -110,18 +112,29 @@ public class TetrisFrame extends JFrame implements PropertyChangeListener {
             mainTheme.stopMusic();
             soundGameOver = new Themes("src/assets/gameover.wav");
             soundGameOver.playMusic();
-            JOptionPane.showMessageDialog(this, "Game Over \n Your score is : " + board.getScore());
+            if(board.gameOver()){
+                JOptionPane.showMessageDialog(this, "Game Over \n Your score is : " + board.getScore());
+            }
+            else if(board2.gameOver()){
+                JOptionPane.showMessageDialog(this, "Game Over \n Your score is : " + board2.getScore());
+            }
             mainTheme=new Themes("src/assets/maintheme.wav");
             mainTheme.loopMusic();
-
         }
-        /*if (event.getPropertyName().equals("Pause")) {
-            if (board.isPause()) {
-                pauseButton.setIcon(new ImageIcon(this.getClass().getResource("/assets/Play.jpg")));
-            } else {
-                pauseButton.setIcon(new ImageIcon(this.getClass().getResource("/assets/Pause.jpg")));
-            }
-        }*/
+
+        if (event.getPropertyName().equals("Pause")) {
+            board.Pause();
+            if(tetrisCanva2!=null)
+                board2.Pause();
+            mainTheme.stopMusic();
+            JOptionPane.showMessageDialog(this, "Pause");
+            mainTheme.playMusic();
+            board.Resume();
+            if(tetrisCanva2!=null)
+                board2.Resume();
+        }
+
+
         if (event.getPropertyName().equals("addJoueur")) {
             board2.setToSleep(false);
             board.initialisation();

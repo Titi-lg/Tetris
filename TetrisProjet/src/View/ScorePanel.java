@@ -10,7 +10,7 @@ public class ScorePanel extends JPanel implements PropertyChangeListener {
 
     public ScorePanel(int score) {
         this.score = score;
-        scoreLabel = new JLabel("Score: " + score);
+        scoreLabel = new JLabel("Score : " + score);
         this.add(scoreLabel);
 
 
@@ -18,7 +18,7 @@ public class ScorePanel extends JPanel implements PropertyChangeListener {
 
     public void updateScore(int score) {
         this.score = score;
-        scoreLabel.setText("Score: " + score);
+        scoreLabel.setText("Score : " + score);
     }
 
     @Override
@@ -29,4 +29,7 @@ public class ScorePanel extends JPanel implements PropertyChangeListener {
     }
 
 
+    public String getScore() {
+        return scoreLabel.getText();
+    }
 }
