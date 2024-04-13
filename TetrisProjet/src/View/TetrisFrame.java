@@ -108,12 +108,11 @@ public class TetrisFrame extends JFrame implements PropertyChangeListener {
             mainTheme.stopMusic();
             soundGameOver = new Themes("src/assets/gameover.wav");
             soundGameOver.playMusic();
+            board2.updateScore(0);
             if(board.gameOver()){
-                board.updateScore(1);
                 JOptionPane.showMessageDialog(this, "Game Over \n Your score is : " + board.getScore());
             }
             else if(board2.gameOver()){
-                board2.updateScore(1);
                 JOptionPane.showMessageDialog(this, "Game Over \n Your score is : " + board2.getScore());
             }
             mainTheme=new Themes("src/assets/maintheme.wav");
