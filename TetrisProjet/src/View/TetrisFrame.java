@@ -55,7 +55,7 @@ public class TetrisFrame extends JFrame implements PropertyChangeListener {
     public TetrisFrame() {
         board = new Board(20, 10);
         board.addPropertyChangeListener(this);
-        board.initialisation();
+        board.restartGame();
         mainTheme = new Themes("src/assets/maintheme.wav");
         mainTheme.loopMusic();
         setTitle("Tetris");
@@ -96,7 +96,7 @@ public class TetrisFrame extends JFrame implements PropertyChangeListener {
         mainTheme.playMusic();
         board2 = new Board(20, 10);
         board2.addPropertyChangeListener(this);
-        board2.initialisation();
+        board2.restartGame();
         thread2 = new Thread(board2);
         thread2.start();
         board2.setToSleep(true);
@@ -132,8 +132,9 @@ public class TetrisFrame extends JFrame implements PropertyChangeListener {
 
 
         if (event.getPropertyName().equals("addJoueur")) {
+            board2.restartGame();
             board2.setToSleep(false);
-            board.initialisation();
+            board.restartGame();
             tetrisCanva2 = new TetrisCanva(board2);
             board2.addPropertyChangeListener(tetrisCanva2);
             pLeft.add(tetrisCanva2);
@@ -162,7 +163,7 @@ public class TetrisFrame extends JFrame implements PropertyChangeListener {
                 pJeu2.remove(pJeu2);
                 keyPadController.setBoard2(null);
                 pack();
-                board.initialisation();
+                board.restartGame();
         }
 
     }
