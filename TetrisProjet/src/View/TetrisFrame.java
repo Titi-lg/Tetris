@@ -28,6 +28,7 @@ public class TetrisFrame extends JFrame implements PropertyChangeListener {
     private KeyPadController keyPadController;
     private TetrisCanva tetrisCanva2 ,tetrisCanva;
 
+
     private NextPieceCanva nextPieceCanva;
     private NextPieceCanva nextPieceCanva2;
 
@@ -46,6 +47,8 @@ public class TetrisFrame extends JFrame implements PropertyChangeListener {
     public void setLargeur(int largeur) {
         this.largeur = largeur;
     }
+
+    public Boolean coop = false;
 
   //  @Override
   //  public void update(Observable o, Object arg) {tetrisCanva.repaint();
@@ -100,6 +103,7 @@ public class TetrisFrame extends JFrame implements PropertyChangeListener {
         thread2 = new Thread(board2);
         thread2.start();
         board2.setToSleep(true);
+        coop= false;
 
 
     }
@@ -109,14 +113,27 @@ public class TetrisFrame extends JFrame implements PropertyChangeListener {
             soundGameOver = new Themes("src/assets/gameover.wav");
             soundGameOver.playMusic();
             board2.updateScore(0);
-            if(board.gameOver()){
+            int scoretotal = board.getScoreInt() + board2.getScoreInt();
+            if(coop.equals(true)){
+                if (board2.gameOver()||board.gameOver()) {
+                    board.setToSleep(true);
+                    board2.setToSleep(true);
+                    JOptionPane.showMessageDialog(this, "Game Over \n Your score is : " + scoretotal+ "\n J1 : "+board.getScore()+"\n J2 : "+board2.getScore());
+                    board.restartGame();
+                    board2.restartGame();
+                    board.setToSleep(false);
+                    board2.setToSleep(false);
+            }}
+            else if(board.gameOver()){
                 JOptionPane.showMessageDialog(this, "Game Over \n Your score is : " + board.getScore());
             }
             else if(board2.gameOver()){
                 JOptionPane.showMessageDialog(this, "Game Over \n Your score is : " + board2.getScore());
             }
+
             mainTheme=new Themes("src/assets/maintheme.wav");
             mainTheme.loopMusic();
+
         }
 
         if (event.getPropertyName().equals("Pause")) {
@@ -138,7 +155,6 @@ public class TetrisFrame extends JFrame implements PropertyChangeListener {
             board.restartGame();
             tetrisCanva2 = new TetrisCanva(board2);
             board2.addPropertyChangeListener(tetrisCanva2);
-            //board2.addPropertyChangeListener(this);
             pLeft.add(tetrisCanva2);
             nextPieceCanva2 = new NextPieceCanva(board2, board2.getBrickManager());
             pNextPeice2 = new JPanel();
@@ -154,6 +170,7 @@ public class TetrisFrame extends JFrame implements PropertyChangeListener {
             pJeu2.add(pRight2, BorderLayout.EAST);
             keyPadController.setBoard2(board2);
             pack();
+            coop=false;
         }
         if (event.getPropertyName().equals("Cancel")) {
                 board2.setToSleep(true);
@@ -166,6 +183,31 @@ public class TetrisFrame extends JFrame implements PropertyChangeListener {
                 keyPadController.setBoard2(null);
                 pack();
                 board.restartGame();
+                coop = false;
+        }
+        if (event.getPropertyName().equals("Coop")) {
+            board2.restartGame();
+            board2.setToSleep(false);
+            board.restartGame();
+            tetrisCanva2 = new TetrisCanva(board2);
+            board2.addPropertyChangeListener(tetrisCanva2);
+            pLeft.add(tetrisCanva2);
+            nextPieceCanva2 = new NextPieceCanva(board2, board2.getBrickManager());
+            pNextPeice2 = new JPanel();
+            pJeu2 = new JPanel(new BorderLayout());
+            pRight2 = new JPanel(new GridLayout(2, 1));
+            scorePanel2 = new ScorePanel(0);
+            board2.addPropertyChangeListener(scorePanel2);
+            pNextPeice2.add(nextPieceCanva2);
+            pRight2.add(pNextPeice2);
+            pRight2.add(scorePanel2);
+            pJeu2.add(tetrisCanva2, BorderLayout.CENTER);
+            add(pJeu2, BorderLayout.WEST);
+            pJeu2.add(pRight2, BorderLayout.EAST);
+            keyPadController.setBoard2(board2);
+            pack();
+            coop = true;
+
         }
 
     }

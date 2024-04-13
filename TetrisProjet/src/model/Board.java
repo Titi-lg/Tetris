@@ -370,6 +370,10 @@ public class Board implements Runnable{
         return String.valueOf(score);
     }
 
+    public Integer getScoreInt() {
+        return score;
+    }
+
     public boolean gameOver(){
         return end;
     }
