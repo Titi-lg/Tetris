@@ -13,6 +13,8 @@ import java.util.Arrays;
 import static java.lang.Thread.sleep;
 
 public class Board implements Runnable{
+
+    public Boolean end=false;
     private int[][] boardMatrix;
     private BrickManager brickManager;
     private final int rows;
@@ -220,9 +222,8 @@ public class Board implements Runnable{
     } else if (direction.equals("Down")) {
         gameOver = stopAndCreateNewBrick();
         if(gameOver){
-            gameEnd(gameOver());
-
-
+            end=true;
+            gameEnd();
         }
         updateNextPiece();
         checkAndClearFullRows();
@@ -359,17 +360,17 @@ public class Board implements Runnable{
         setToSleep(false);
     }
 
-    public void gameEnd(Boolean gameOver) {
+    public void gameEnd() {
         pcs.firePropertyChange("GameOver", null, null);
-        this.gameOver();
         System.out.println("Game Over");
         restartGame();
-    }
-    public Boolean gameOver() {
-        return true;
     }
 
     public String getScore() {
         return String.valueOf(score);
+    }
+
+    public boolean gameOver(){
+        return end;
     }
 }

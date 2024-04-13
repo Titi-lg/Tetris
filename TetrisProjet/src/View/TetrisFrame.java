@@ -109,9 +109,11 @@ public class TetrisFrame extends JFrame implements PropertyChangeListener {
             soundGameOver = new Themes("src/assets/gameover.wav");
             soundGameOver.playMusic();
             if(board.gameOver()){
+                board.updateScore(1);
                 JOptionPane.showMessageDialog(this, "Game Over \n Your score is : " + board.getScore());
             }
             else if(board2.gameOver()){
+                board2.updateScore(1);
                 JOptionPane.showMessageDialog(this, "Game Over \n Your score is : " + board2.getScore());
             }
             mainTheme=new Themes("src/assets/maintheme.wav");
@@ -137,6 +139,7 @@ public class TetrisFrame extends JFrame implements PropertyChangeListener {
             board.restartGame();
             tetrisCanva2 = new TetrisCanva(board2);
             board2.addPropertyChangeListener(tetrisCanva2);
+            //board2.addPropertyChangeListener(this);
             pLeft.add(tetrisCanva2);
             nextPieceCanva2 = new NextPieceCanva(board2, board2.getBrickManager());
             pNextPeice2 = new JPanel();
