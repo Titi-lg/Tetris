@@ -75,8 +75,10 @@ public class TetrisFrame extends JFrame implements PropertyChangeListener {
         pJeu = new JPanel(new BorderLayout());
         pRight = new JPanel(new GridLayout(2,1));
         scorePanel = new ScorePanel(0);
+        scorePanel.setBorder(BorderFactory.createTitledBorder("Score"));
         board.addPropertyChangeListener(scorePanel);
         pNextPiece = new JPanel();
+        pNextPiece.setBorder(BorderFactory.createTitledBorder("Next Piece"));
         pOptions = new JPanel();
         pLeft = new JPanel();
         pSouth = new JPanel();
@@ -106,6 +108,7 @@ public class TetrisFrame extends JFrame implements PropertyChangeListener {
         thread2.start();
         board2.setToSleep(true);
         coop= false;
+        pack();
 
 
     }
@@ -163,8 +166,10 @@ public class TetrisFrame extends JFrame implements PropertyChangeListener {
             pJeu2 = new JPanel(new BorderLayout());
             pRight2 = new JPanel(new GridLayout(2, 1));
             scorePanel2 = new ScorePanel(0);
+            scorePanel2.setBorder(BorderFactory.createTitledBorder("Score"));
             board2.addPropertyChangeListener(scorePanel2);
             pNextPeice2.add(nextPieceCanva2);
+            pNextPeice2.setBorder(BorderFactory.createTitledBorder("Next Piece"));
             pRight2.add(pNextPeice2);
             pRight2.add(scorePanel2);
             pJeu2.add(tetrisCanva2, BorderLayout.CENTER);
@@ -196,9 +201,11 @@ public class TetrisFrame extends JFrame implements PropertyChangeListener {
             pLeft.add(tetrisCanva2);
             nextPieceCanva2 = new NextPieceCanva(board2, board2.getBrickManager());
             pNextPeice2 = new JPanel();
+            pNextPeice2.setBorder(BorderFactory.createTitledBorder("Next Piece"));
             pJeu2 = new JPanel(new BorderLayout());
             pRight2 = new JPanel(new GridLayout(2, 1));
             scorePanel2 = new ScorePanel(0);
+            scorePanel2.setBorder(BorderFactory.createTitledBorder("Score"));
             board2.addPropertyChangeListener(scorePanel2);
             pNextPeice2.add(nextPieceCanva2);
             pRight2.add(pNextPeice2);
