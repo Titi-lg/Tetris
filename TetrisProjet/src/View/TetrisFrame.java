@@ -56,11 +56,8 @@ public class TetrisFrame extends JFrame implements PropertyChangeListener {
         board = new Board(20, 10);
         board.addPropertyChangeListener(this);
         board.initialisation();
-        board2= new Board(20,10); //new Board(20, 10
-        board2.addPropertyChangeListener(this);
         mainTheme = new Themes("src/assets/maintheme.wav");
         mainTheme.loopMusic();
-
         setTitle("Tetris");
         setSize(largeur+200, hauteur+200);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -70,7 +67,6 @@ public class TetrisFrame extends JFrame implements PropertyChangeListener {
         pauseButton.setFocusPainted(false); // Remove focus border
         pauseButton.setContentAreaFilled(false); // Make the button transparent
         pauseButton.setPreferredSize(new Dimension(100, 50));
-
         pJeu = new JPanel(new BorderLayout());
         pRight = new JPanel(new GridLayout(2,1));
         scorePanel = new ScorePanel(0);
@@ -138,8 +134,6 @@ public class TetrisFrame extends JFrame implements PropertyChangeListener {
         if (event.getPropertyName().equals("addJoueur")) {
             board2.setToSleep(false);
             board.initialisation();
-            board2.initialisation();
-
             tetrisCanva2 = new TetrisCanva(board2);
             board2.addPropertyChangeListener(tetrisCanva2);
             pLeft.add(tetrisCanva2);
