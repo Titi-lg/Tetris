@@ -226,9 +226,10 @@ public class Board implements Runnable{
     } else if (direction.equals("Down")) {
         gameOver = stopAndCreateNewBrick();
         if(gameOver){
+            pcs.firePropertyChange("GameOver", null, null);
             System.out.println("Game Over");
-            Themes soundGameOver = new Themes("src/assets/gameover.wav");
-            soundGameOver.playMusic();
+
+
             restartGame();
 
         }
@@ -355,5 +356,9 @@ public class Board implements Runnable{
     // Retourne le brickManager pour le constructeur de NextPieceCanva
     public BrickManager getBrickManager() {
         return brickManager;
+    }
+
+    public String getScore() {
+        return String.valueOf(score);
     }
 }

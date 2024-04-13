@@ -17,6 +17,9 @@ public class TetrisFrame extends JFrame implements PropertyChangeListener {
     private JButton pauseButton;
 
     private Board board;
+
+    private Themes mainTheme;
+    private Themes soundGameOver;
     private Board board2;
     private JPanel pJeu, pNextPiece, pOptions,pRight,pLeft,pSouth,pNextPeice2,pJeu2,pRight2;
     private ScorePanel scorePanel, scorePanel2;
@@ -53,6 +56,8 @@ public class TetrisFrame extends JFrame implements PropertyChangeListener {
         board = new Board(20, 10);
         board.addPropertyChangeListener(this);
         board.initialisation();
+        mainTheme = new Themes("src/assets/maintheme.wav");
+        mainTheme.loopMusic();
 
         setTitle("Tetris");
         setSize(largeur+200, hauteur+200);
@@ -90,8 +95,7 @@ public class TetrisFrame extends JFrame implements PropertyChangeListener {
         setVisible(true);
         thread = new Thread(board);
         thread.start();
-        Themes mainThemes = new Themes("src/assets/maintheme.wav");
-        mainThemes.playMusic();
+        mainTheme.playMusic();
         board2 = new Board(20, 10);
         board2.addPropertyChangeListener(this);
         board2.initialisation();
@@ -103,7 +107,13 @@ public class TetrisFrame extends JFrame implements PropertyChangeListener {
     }
     public void propertyChange(PropertyChangeEvent event) {
         if (event.getPropertyName().equals("GameOver")) {
-            JOptionPane.showMessageDialog(this, "Game Over");
+            mainTheme.stopMusic();
+            soundGameOver = new Themes("src/assets/gameover.wav");
+            soundGameOver.playMusic();
+            JOptionPane.showMessageDialog(this, "Game Over \n Your score is : " + board.getScore());
+            mainTheme=new Themes("src/assets/maintheme.wav");
+            mainTheme.loopMusic();
+
         }
         /*if (event.getPropertyName().equals("Pause")) {
             if (board.isPause()) {
@@ -147,6 +157,7 @@ public class TetrisFrame extends JFrame implements PropertyChangeListener {
                 pack();
                 board.initialisation();
         }
+
     }
 
 

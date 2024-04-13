@@ -28,6 +28,10 @@ public class Themes {
         clip.stop();
     }
 
+    public void loopMusic() {
+        clip.loop(Clip.LOOP_CONTINUOUSLY);
+    }
+
     public void setVolume(float volume) {
         // Note: Cette méthode nécessite Java 7 ou une version ultérieure
         FloatControl volumeControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
