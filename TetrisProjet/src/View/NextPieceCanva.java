@@ -93,4 +93,7 @@ protected void paintComponent(Graphics g) {
     }
 }
 
+    public void setBoard(Board board) {
+        this.board = board;
+    }
 }

@@ -2,6 +2,7 @@
 package Controller;
 
 import model.Board;
+import model.BoardGrand;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -10,6 +11,8 @@ public class KeyPadController extends KeyAdapter {
     private Board board;
 
     private Board board2;
+    private BoardGrand boardGrand;
+
 
     public KeyPadController(Board board) {
         this.board = board;
@@ -18,6 +21,10 @@ public class KeyPadController extends KeyAdapter {
     public KeyPadController(Board board, Board board2) {
         this.board = board;
         this.board2 = board2;
+    }
+
+    public KeyPadController(BoardGrand boardGrand) {
+        this.boardGrand = boardGrand;
     }
 
     public Board getBoard() {
@@ -39,16 +46,32 @@ public class KeyPadController extends KeyAdapter {
     @Override
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-            board.handleMovement("Down");
+            if(board!=null)
+                board.handleMovement("Down");
+            if(boardGrand!=null){
+                boardGrand.handleMovement("Down");
+            }
         }
         if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-            board.handleMovement("Left");
+            if(board!=null)
+                board.handleMovement("Left");
+            if(boardGrand!=null){
+                boardGrand.handleMovement("Left");
+            }
         }
         if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            board.handleMovement("Right");
+            if(board!=null)
+                board.handleMovement("Right");
+            if(boardGrand!=null){
+                boardGrand.handleMovement("Right");
+            }
         }
         if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-            board.handleMovement("Space");
+            if(board!=null)
+                board.handleMovement("Space");
+            if(boardGrand!=null){
+                boardGrand.handleMovement("Space");
+            }
         }
         if (e.getKeyCode() == KeyEvent.VK_S && board2 != null) {
             board2.handleMovement("Down");
@@ -62,6 +85,18 @@ public class KeyPadController extends KeyAdapter {
         if (e.getKeyCode() == KeyEvent.VK_Z && board2 != null) {
             board2.handleMovement("Space");
         }
+        if (e.getKeyCode() == KeyEvent.VK_S && boardGrand != null) {
+            boardGrand.handleMovement2("Down");
+        }
+        if (e.getKeyCode() == KeyEvent.VK_Q && boardGrand != null) {
+            boardGrand.handleMovement2("Left");
+        }
+        if (e.getKeyCode() == KeyEvent.VK_D && boardGrand != null) {
+            boardGrand.handleMovement2("Right");
+        }
+        if (e.getKeyCode() == KeyEvent.VK_Z && boardGrand != null) {
+            boardGrand.handleMovement2("Space");
+        }
         if (e.getKeyCode() == KeyEvent.VK_P) {
             board.getPcs().firePropertyChange("addJoueur", null, null);
         }
@@ -70,11 +105,24 @@ public class KeyPadController extends KeyAdapter {
         }
 
         if(e.getKeyCode()==KeyEvent.VK_B){
-            board.getPcs().firePropertyChange("Pause",null,null);
+            if(board!=null)
+                board.getPcs().firePropertyChange("Pause",null,null);
+            if(boardGrand!=null){
+                boardGrand.getPcs().firePropertyChange("Pause",null,null);
+            }
+
         }
         if(e.getKeyCode()==KeyEvent.VK_C){
             board.getPcs().firePropertyChange("Coop",null,null);
         }
+        if(e.getKeyCode()==KeyEvent.VK_G){
+            if(board!=null)
+                board.getPcs().firePropertyChange("Grand",null,null);
+            if(boardGrand!=null){
+                boardGrand.getPcs().firePropertyChange("Grand",null,null);
+            }
+        }
+
     }
 }
 

@@ -14,18 +14,17 @@ import java.net.URL;
 
 public class TetrisFrame extends JFrame implements PropertyChangeListener {
     //private TetrisCanva tetrisCanva;
-    public static int hauteur=800, largeur=500;
+    //public static int hauteur=800, largeur=500;
     private JButton pauseButton;
 
-    private Board board;
+    private Board board, board2, board3;
 
     private Themes mainTheme;
     private Themes soundGameOver;
-    private Board board2;
+
     private JPanel pJeu, pNextPiece, pOptions,pRight,pLeft,pSouth,pNextPeice2,pJeu2,pRight2;
     private ScorePanel scorePanel, scorePanel2;
-    private Thread thread;
-    private Thread thread2;
+    private Thread thread, thread2, thread3;
     private KeyPadController keyPadController;
     private TetrisCanva tetrisCanva2 ,tetrisCanva;
 
@@ -34,7 +33,7 @@ public class TetrisFrame extends JFrame implements PropertyChangeListener {
     private NextPieceCanva nextPieceCanva2;
     private BufferedImage backgroundImage;
 
-    public int getHauteur() {
+    /*public int getHauteur() {
         return hauteur;
     }
 
@@ -48,7 +47,7 @@ public class TetrisFrame extends JFrame implements PropertyChangeListener {
 
     public void setLargeur(int largeur) {
         this.largeur = largeur;
-    }
+    }*/
 
     public Boolean coop = false;
 
@@ -57,6 +56,10 @@ public class TetrisFrame extends JFrame implements PropertyChangeListener {
     //}
 
 
+    public TetrisFrame(Board board) throws HeadlessException {
+        this.board = board;
+    }
+
     public TetrisFrame() {
         board = new Board(20, 10);
         board.addPropertyChangeListener(this);
@@ -64,7 +67,7 @@ public class TetrisFrame extends JFrame implements PropertyChangeListener {
         mainTheme = new Themes("src/assets/maintheme.wav");
         mainTheme.loopMusic();
         setTitle("Tetris");
-        setSize(largeur+200, hauteur+200);
+        //setSize(largeur+200, hauteur+200);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
         pauseButton = new JButton(new ImageIcon(this.getClass().getResource("/assets/Pause.jpg")));
@@ -100,7 +103,6 @@ public class TetrisFrame extends JFrame implements PropertyChangeListener {
         setVisible(true);
         thread = new Thread(board);
         thread.start();
-        mainTheme.playMusic();
         board2 = new Board(20, 10);
         board2.addPropertyChangeListener(this);
         board2.restartGame();
@@ -111,6 +113,7 @@ public class TetrisFrame extends JFrame implements PropertyChangeListener {
         pack();
 
 
+
     }
     public void propertyChange(PropertyChangeEvent event) {
         if (event.getPropertyName().equals("GameOver")) {
@@ -119,37 +122,36 @@ public class TetrisFrame extends JFrame implements PropertyChangeListener {
             soundGameOver.playMusic();
             board2.updateScore(0);
             int scoretotal = board.getScoreInt() + board2.getScoreInt();
-            if(coop.equals(true)){
-                if (board2.gameOver()||board.gameOver()) {
+            if (coop.equals(true)) {
+                if (board2.gameOver() || board.gameOver()) {
                     board.setToSleep(true);
                     board2.setToSleep(true);
-                    JOptionPane.showMessageDialog(this, "Game Over \n Your score is : " + scoretotal+ "\n J1 : "+board.getScore()+"\n J2 : "+board2.getScore());
+                    JOptionPane.showMessageDialog(this, "Game Over \n Your score is : " + scoretotal + "\n J1 : " + board.getScore() + "\n J2 : " + board2.getScore());
                     board.restartGame();
                     board2.restartGame();
                     board.setToSleep(false);
                     board2.setToSleep(false);
-            }}
-            else if(board.gameOver()){
+                }
+            } else if (board.gameOver()) {
                 JOptionPane.showMessageDialog(this, "Game Over \n Your score is : " + board.getScore());
-            }
-            else if(board2.gameOver()){
+            } else if (board2.gameOver()) {
                 JOptionPane.showMessageDialog(this, "Game Over \n Your score is : " + board2.getScore());
             }
 
-            mainTheme=new Themes("src/assets/maintheme.wav");
+            mainTheme = new Themes("src/assets/maintheme.wav");
             mainTheme.loopMusic();
 
         }
 
         if (event.getPropertyName().equals("Pause")) {
             board.Pause();
-            if(tetrisCanva2!=null)
+            if (tetrisCanva2 != null)
                 board2.Pause();
             mainTheme.stopMusic();
             JOptionPane.showMessageDialog(this, "Pause");
             mainTheme.playMusic();
             board.Resume();
-            if(tetrisCanva2!=null)
+            if (tetrisCanva2 != null)
                 board2.Resume();
         }
 
@@ -177,20 +179,20 @@ public class TetrisFrame extends JFrame implements PropertyChangeListener {
             pJeu2.add(pRight2, BorderLayout.EAST);
             keyPadController.setBoard2(board2);
             pack();
-            coop=false;
+            coop = false;
         }
         if (event.getPropertyName().equals("Cancel")) {
-                board2.setToSleep(true);
-                pJeu2.remove(pRight2);
-                pJeu2.remove(tetrisCanva2);
-                pLeft.remove(tetrisCanva2);
-                pJeu2.remove(pNextPeice2);
-                pJeu2.remove(pRight2);
-                pJeu2.remove(pJeu2);
-                keyPadController.setBoard2(null);
-                pack();
-                board.restartGame();
-                coop = false;
+            board2.setToSleep(true);
+            pJeu2.remove(pRight2);
+            pJeu2.remove(tetrisCanva2);
+            pLeft.remove(tetrisCanva2);
+            pJeu2.remove(pNextPeice2);
+            pJeu2.remove(pRight2);
+            pJeu2.remove(pJeu2);
+            keyPadController.setBoard2(null);
+            pack();
+            board.restartGame();
+            coop = false;
         }
         if (event.getPropertyName().equals("Coop")) {
             board2.restartGame();
@@ -218,9 +220,15 @@ public class TetrisFrame extends JFrame implements PropertyChangeListener {
             coop = true;
 
         }
+ if(event.getPropertyName().equals("Grand")){
+    // Close the current game
+    this.dispose();
+    board.setToSleep(true);
+    mainTheme.stopMusic();
 
+    // Launch the new game
+    GrandTetrisFrame newGame = new GrandTetrisFrame();
+    newGame.setVisible(true);
+}
     }
-
-
-
 }

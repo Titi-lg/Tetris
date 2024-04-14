@@ -70,4 +70,8 @@ public class TetrisCanva extends JPanel implements PropertyChangeListener {
         this.grid = newGrid;
         repaint();
     }
+
+    public void setBoard(Board board) {
+        this.board = board;
+    }
 }

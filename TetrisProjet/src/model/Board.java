@@ -9,6 +9,9 @@ import java.awt.*;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.Arrays;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import static java.lang.Thread.sleep;
 
@@ -38,7 +41,7 @@ public class Board implements Runnable{
 
     public boolean createNewBrick() {
         Brick currentBrick = brickManager.getBrick();
-        point = new Point(4, 0);
+        point = new Point((cols/2)-1, 0);
         return TabOperation.intersect(boardMatrix, currentBrick.getShapeMatrix(brickManager.getBrick().getNumberOfRotation()), (int) point.getX(), (int) point.getY());
     }
     public boolean stopAndCreateNewBrick() {
