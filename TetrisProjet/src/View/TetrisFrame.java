@@ -224,6 +224,7 @@ public class TetrisFrame extends JFrame implements PropertyChangeListener {
     // Close the current game
     this.dispose();
     board.setToSleep(true);
+    board2.setToSleep(true);
     mainTheme.stopMusic();
 
     // Launch the new game

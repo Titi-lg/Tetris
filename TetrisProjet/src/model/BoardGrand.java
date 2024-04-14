@@ -136,7 +136,25 @@ public class BoardGrand implements Runnable{
 
     private void moveRowsDown(int startRow) {
         for (int i = startRow; i > 0; i--) {
+            // Copier la ligne située au-dessus
             System.arraycopy(boardMatrix[i - 1], 0, boardMatrix[i], 0, cols);
+        }
+
+        // Si une ligne a été détruite, vérifier s'il y a des blocs inactifs au-dessus des lignes déplacées
+        for (int i = startRow; i > 0; i--) {
+            // Vérifier si la ligne contient des blocs inactifs
+            boolean inactiveBlocksAbove = false;
+            for (int j = 0; j < cols; j++) {
+                if (boardMatrix[i - 1][j] != 0) {
+                    inactiveBlocksAbove = true;
+                    break;
+                }
+            }
+            // Si des blocs inactifs sont présents, déplacer la ligne vers le bas
+            if (inactiveBlocksAbove) {
+                System.arraycopy(boardMatrix[i - 1], 0, boardMatrix[i], 0, cols);
+                Arrays.fill(boardMatrix[i - 1], 0); // Effacer la ligne originale
+            }
         }
     }
 

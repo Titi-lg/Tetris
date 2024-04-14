@@ -121,8 +121,10 @@ public class GrandTetrisFrame extends JFrame implements PropertyChangeListener {
             board.Resume();
         }
         if(event.getPropertyName().equals("Grand")){
+
             // Close the current game
             this.dispose();
+            board.setToSleep(true);
             mainTheme.stopMusic();
 
             // Launch the new game
