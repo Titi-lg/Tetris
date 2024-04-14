@@ -135,26 +135,34 @@ public class BoardGrand implements Runnable{
     }
 
     private void moveRowsDown(int startRow) {
+        // Supprimer les blocs du joueur
+        for (int j = 0; j < cols; j++) {
+            boardMatrix[0][j] = 0;
+        }
+
+        // Si une ligne a été détruite, déplacer les lignes vers le bas
         for (int i = startRow; i > 0; i--) {
-            // Copier la ligne située au-dessus
             System.arraycopy(boardMatrix[i - 1], 0, boardMatrix[i], 0, cols);
         }
 
-        // Si une ligne a été détruite, vérifier s'il y a des blocs inactifs au-dessus des lignes déplacées
-        for (int i = startRow; i > 0; i--) {
-            // Vérifier si la ligne contient des blocs inactifs
-            boolean inactiveBlocksAbove = false;
-            for (int j = 0; j < cols; j++) {
-                if (boardMatrix[i - 1][j] != 0) {
-                    inactiveBlocksAbove = true;
-                    break;
-                }
+        // Réinitialiser les lignes au-dessus de l'avant-dernière ligne déplacée vers le bas
+        for (int i = startRow - 3; i >= 0; i--) {
+            Arrays.fill(boardMatrix[i], 0);
+        }
+
+        // Vérifier si le bloc du joueur est isolé
+        boolean playerBlockIsolated = true;
+        for (int j = 0; j < cols; j++) {
+            if (boardMatrix[1][j] != 0) {
+                playerBlockIsolated = false;
+                break;
             }
-            // Si des blocs inactifs sont présents, déplacer la ligne vers le bas
-            if (inactiveBlocksAbove) {
-                System.arraycopy(boardMatrix[i - 1], 0, boardMatrix[i], 0, cols);
-                Arrays.fill(boardMatrix[i - 1], 0); // Effacer la ligne originale
-            }
+        }
+
+        // Si le bloc du joueur est isolé, supprimer le bloc et créer deux nouveaux blocs pour le joueur
+        if (playerBlockIsolated) {
+            createNewBrick();
+            createNewBrick2();
         }
     }
 

@@ -149,7 +149,7 @@ public class TetrisFrame extends JFrame implements PropertyChangeListener {
                 board2.Pause();
             mainTheme.stopMusic();
             JOptionPane.showMessageDialog(this, "Pause");
-            mainTheme.playMusic();
+            mainTheme.loopMusic();
             board.Resume();
             if (tetrisCanva2 != null)
                 board2.Resume();
