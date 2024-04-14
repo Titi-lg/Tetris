@@ -10,6 +10,7 @@ import java.awt.event.KeyEvent;
 public class KeyPadController extends KeyAdapter {
     private Board board;
 
+
     private Board board2;
     private BoardGrand boardGrand;
 

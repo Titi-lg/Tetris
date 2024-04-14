@@ -273,9 +273,17 @@ public class BoardGrand implements Runnable{
     }
 
 
-    private void updateNextPiece() {
+    public void updateNextPiece() {
         Brick nextBrick = brickManager.getNextBrick();
+        //Brick nextBrick2 = brickManager2.getNextBrick();
         pcs.firePropertyChange("NextPiece", null, nextBrick);
+        //pcs.firePropertyChange("NextPiece2", null, nextBrick2);
+    }
+    public void updateNextPiece2() {
+        //Brick nextBrick = brickManager.getNextBrick();
+        Brick nextBrick2 = brickManager2.getNextBrick();
+        //pcs.firePropertyChange("NextPiece", null, nextBrick);
+        pcs.firePropertyChange("NextPiece2", null, nextBrick2);
     }
 
     public void restartGame() {
@@ -563,7 +571,7 @@ public class BoardGrand implements Runnable{
             if(gameOver){
                 gameEnd(gameOver());
             }
-            updateNextPiece();
+            updateNextPiece2();
             checkAndClearFullRows();
         }
     }

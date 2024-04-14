@@ -1,6 +1,7 @@
 package View;
 
 import model.Board;
+import model.BoardGrand;
 import model.bricks.Brick;
 import model.bricks.BrickManager;
 
@@ -18,8 +19,11 @@ public class NextPieceCanva extends JPanel implements PropertyChangeListener {
     private static final int COLS = 4;
     private Board board;
 
+    private BoardGrand boardGrand;
+
     private Brick nextBrick;
     private BrickManager brickManager;
+
 
     /**
      * Constructeur de la classe NextPieceCanva
@@ -29,6 +33,13 @@ public class NextPieceCanva extends JPanel implements PropertyChangeListener {
     public NextPieceCanva(Board board, BrickManager brickManager) {
         this.board = board;
         this.brickManager = brickManager;
+        board.addPropertyChangeListener(this);
+        this.setPreferredSize(new Dimension(COLS * BLOCK_SIZE, ROWS * BLOCK_SIZE));
+        this.nextBrick = brickManager.getNextBrick();
+    }
+
+    public NextPieceCanva(BoardGrand board,BrickManager brickManager) {
+        this.boardGrand = board;
         board.addPropertyChangeListener(this);
         this.setPreferredSize(new Dimension(COLS * BLOCK_SIZE, ROWS * BLOCK_SIZE));
         this.nextBrick = brickManager.getNextBrick();
@@ -93,7 +104,4 @@ protected void paintComponent(Graphics g) {
     }
 }
 
-    public void setBoard(Board board) {
-        this.board = board;
-    }
 }

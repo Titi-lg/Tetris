@@ -18,7 +18,7 @@ public class GrandTetrisFrame extends JFrame implements PropertyChangeListener {
     private Themes mainTheme;
     private Themes soundGameOver;
 
-    private JPanel pJeu, pNextPiece, pOptions, pRight, pLeft, pSouth;
+    private JPanel pJeu, pNextPiece, pOptions, pRight, pLeft, pSouth, pNextPiece2;
     private ScorePanel scorePanel;
     private Thread thread;
     private KeyPadController keyPadController;
@@ -26,7 +26,7 @@ public class GrandTetrisFrame extends JFrame implements PropertyChangeListener {
 
 
     private NextPieceCanva nextPieceCanva;
-    private NextPieceCanva nextPieceCanva2;
+    private NextPieceCanvaJ2 nextPieceCanva2;
     private BufferedImage backgroundImage;
 
     /*public int getHauteur() {
@@ -67,18 +67,23 @@ public class GrandTetrisFrame extends JFrame implements PropertyChangeListener {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
         pJeu = new JPanel(new BorderLayout());
-        pRight = new JPanel(new GridLayout(2, 1));
+        pRight = new JPanel(new GridLayout(3, 1));
         scorePanel = new ScorePanel(0);
         scorePanel.setBorder(BorderFactory.createTitledBorder("Score"));
         board.addPropertyChangeListener(scorePanel);
         pNextPiece = new JPanel();
-        pNextPiece.setBorder(BorderFactory.createTitledBorder("Next Piece"));
+        pNextPiece.setBorder(BorderFactory.createTitledBorder("Next J1"));
+        pNextPiece2 = new JPanel();
+        pNextPiece2.setBorder(BorderFactory.createTitledBorder("Next J2"));
         pOptions = new JPanel();
         pLeft = new JPanel();
         pSouth = new JPanel();
-        //nextPieceCanva = new NextPieceCanva(board, board.getBrickManager());
-        //pNextPiece.add(nextPieceCanva);
-        //pRight.add(pNextPiece);
+        nextPieceCanva = new NextPieceCanva(board, board.getBrickManager());
+        pNextPiece.add(nextPieceCanva);
+        nextPieceCanva2 = new NextPieceCanvaJ2(board, board.getBrickManager2());
+        pNextPiece2.add(nextPieceCanva2);
+        pRight.add(pNextPiece);
+        pRight.add(pNextPiece2);
         pRight.add(scorePanel);
         keyPadController = new KeyPadController(board);
         addKeyListener(keyPadController);
@@ -131,5 +136,6 @@ public class GrandTetrisFrame extends JFrame implements PropertyChangeListener {
             TetrisFrame newGame = new TetrisFrame();
             newGame.setVisible(true);
         }
+
     }
 }
