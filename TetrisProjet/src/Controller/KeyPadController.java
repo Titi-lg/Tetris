@@ -102,7 +102,10 @@ public class KeyPadController extends KeyAdapter {
             board.getPcs().firePropertyChange("addJoueur", null, null);
         }
         if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-            board.getPcs().firePropertyChange("Cancel", null, null);
+            if(board!=null)
+                board.getPcs().firePropertyChange("Cancel", null, null);
+            if(boardGrand!=null)
+                boardGrand.getPcs().firePropertyChange("Cancel", null, null);
         }
 
         if(e.getKeyCode()==KeyEvent.VK_B){
@@ -119,11 +122,9 @@ public class KeyPadController extends KeyAdapter {
         if(e.getKeyCode()==KeyEvent.VK_G){
             if(board!=null)
                 board.getPcs().firePropertyChange("Grand",null,null);
-            if(boardGrand!=null){
-                boardGrand.getPcs().firePropertyChange("Grand",null,null);
             }
         }
 
     }
-}
+
 

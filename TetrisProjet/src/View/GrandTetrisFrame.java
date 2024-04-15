@@ -62,7 +62,7 @@ public class GrandTetrisFrame extends JFrame implements PropertyChangeListener {
         board.restartGame();
         mainTheme = new Themes("src/assets/maintheme.wav");
         mainTheme.loopMusic();
-        setTitle("Tetris");
+        setTitle("Grand Tetris Coop");
         //setSize(largeur+200, hauteur+200);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
@@ -125,7 +125,7 @@ public class GrandTetrisFrame extends JFrame implements PropertyChangeListener {
             mainTheme.loopMusic();
             board.Resume();
         }
-        if(event.getPropertyName().equals("Grand")){
+        if(event.getPropertyName().equals("Cancel")){
 
             // Close the current game
             this.dispose();

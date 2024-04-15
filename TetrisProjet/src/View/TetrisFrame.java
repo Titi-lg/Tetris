@@ -157,6 +157,7 @@ public class TetrisFrame extends JFrame implements PropertyChangeListener {
 
 
         if (event.getPropertyName().equals("addJoueur")) {
+            setTitle("Versus Tetris");
             board2.restartGame();
             board2.setToSleep(false);
             board.restartGame();
@@ -195,6 +196,7 @@ public class TetrisFrame extends JFrame implements PropertyChangeListener {
             coop = false;
         }
         if (event.getPropertyName().equals("Coop")) {
+            setTitle("Coop Tetris");
             board2.restartGame();
             board2.setToSleep(false);
             board.restartGame();
