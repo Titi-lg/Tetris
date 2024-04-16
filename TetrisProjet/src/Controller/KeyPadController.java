@@ -67,7 +67,7 @@ public class KeyPadController extends KeyAdapter {
                 boardGrand.handleMovement("Right");
             }
         }
-        if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+        if (e.getKeyCode() == KeyEvent.VK_SPACE || e.getKeyCode() == KeyEvent.VK_UP) {
             if(board!=null)
                 board.handleMovement("Space");
             if(boardGrand!=null){
