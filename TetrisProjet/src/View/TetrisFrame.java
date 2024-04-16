@@ -31,25 +31,8 @@ public class TetrisFrame extends JFrame implements PropertyChangeListener {
 
     private NextPieceCanva nextPieceCanva;
     private NextPieceCanva nextPieceCanva2;
-    private BufferedImage backgroundImage;
-
-    /*public int getHauteur() {
-        return hauteur;
-    }
-
-    public int getLargeur() {
-        return largeur;
-    }
-
-    public void setHauteur(int hauteur) {
-        this.hauteur = hauteur;
-    }
-
-    public void setLargeur(int largeur) {
-        this.largeur = largeur;
-    }*/
-
     public Boolean coop = false;
+    public Boolean versus = false;
 
   //  @Override
   //  public void update(Observable o, Object arg) {tetrisCanva.repaint();
@@ -132,9 +115,21 @@ public class TetrisFrame extends JFrame implements PropertyChangeListener {
                     board.setToSleep(false);
                     board2.setToSleep(false);
                 }
-            } else if (board.gameOver()) {
+            } else if (versus.equals(true)) {
+                if (board2.gameOver()) {
+                    board.setToSleep(true);
+                    JOptionPane.showMessageDialog(this, "Game Over j2 \n J1 win: " + board.getScore());
+                    board.restartGame();
+                    board.setToSleep(false);
+                } else if (board.gameOver()) {
+                    board2.setToSleep(true);
+                    JOptionPane.showMessageDialog(this, "Game Over j1 \n J2 win : " + board2.getScore());
+                    board2.restartGame();
+                    board2.setToSleep(false);
+                }
+            } else if (board.gameOver() && versus.equals(false) && coop.equals(false)){
                 JOptionPane.showMessageDialog(this, "Game Over \n Your score is : " + board.getScore());
-            } else if (board2.gameOver()) {
+            } else if (board2.gameOver() && versus.equals(false) && coop.equals(false)){
                 JOptionPane.showMessageDialog(this, "Game Over \n Your score is : " + board2.getScore());
             }
 
@@ -180,6 +175,7 @@ public class TetrisFrame extends JFrame implements PropertyChangeListener {
             pJeu2.add(pRight2, BorderLayout.EAST);
             keyPadController.setBoard2(board2);
             pack();
+            versus = true;
             coop = false;
         }
         if (event.getPropertyName().equals("Cancel")) {
@@ -194,6 +190,7 @@ public class TetrisFrame extends JFrame implements PropertyChangeListener {
             pack();
             board.restartGame();
             coop = false;
+            versus = false;
         }
         if (event.getPropertyName().equals("Coop")) {
             setTitle("Coop Tetris");
@@ -220,6 +217,7 @@ public class TetrisFrame extends JFrame implements PropertyChangeListener {
             keyPadController.setBoard2(board2);
             pack();
             coop = true;
+            versus = false;
 
         }
  if(event.getPropertyName().equals("Grand")){

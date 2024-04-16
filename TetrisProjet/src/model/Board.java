@@ -368,7 +368,7 @@ public class Board implements Runnable{
         restartGame();
     }
     public Boolean gameOver() {
-        return true;
+        return createNewBrick();
     }
 
     public String getScore() {
