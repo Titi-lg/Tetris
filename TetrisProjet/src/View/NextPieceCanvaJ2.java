@@ -17,12 +17,10 @@ public class NextPieceCanvaJ2 extends JPanel implements PropertyChangeListener {
     private static final int BLOCK_SIZE = 30;
     private static final int ROWS = 4;
     private static final int COLS = 4;
-    private Board board;
 
     private BoardGrand boardGrand;
 
     private Brick nextBrick;
-    private BrickManager brickManager;
 
 
     /**

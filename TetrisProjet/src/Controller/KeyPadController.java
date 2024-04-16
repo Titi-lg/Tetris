@@ -14,11 +14,6 @@ public class KeyPadController extends KeyAdapter {
     private Board board2;
     private BoardGrand boardGrand;
 
-
-    public KeyPadController(Board board) {
-        this.board = board;
-    }
-
     public KeyPadController(Board board, Board board2) {
         this.board = board;
         this.board2 = board2;

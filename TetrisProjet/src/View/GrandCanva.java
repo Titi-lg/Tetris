@@ -71,8 +71,4 @@ public class GrandCanva extends JPanel implements PropertyChangeListener {
         this.grid = newGrid;
         repaint();
     }
-
-    public void setBoard(BoardGrand board) {
-        this.board = board;
-    }
 }

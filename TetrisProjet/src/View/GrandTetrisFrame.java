@@ -27,34 +27,7 @@ public class GrandTetrisFrame extends JFrame implements PropertyChangeListener {
 
     private NextPieceCanva nextPieceCanva;
     private NextPieceCanvaJ2 nextPieceCanva2;
-    private BufferedImage backgroundImage;
-
-    /*public int getHauteur() {
-        return hauteur;
-    }
-
-    public int getLargeur() {
-        return largeur;
-    }
-
-    public void setHauteur(int hauteur) {
-        this.hauteur = hauteur;
-    }
-
-    public void setLargeur(int largeur) {
-        this.largeur = largeur;
-    }*/
-
     public Boolean coop = false;
-
-    //  @Override
-    //  public void update(Observable o, Object arg) {tetrisCanva.repaint();
-    //}
-
-
-    public GrandTetrisFrame(BoardGrand board) throws HeadlessException {
-        this.board = board;
-    }
 
     public GrandTetrisFrame() {
         board = new BoardGrand(25, 20);

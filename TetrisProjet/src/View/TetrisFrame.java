@@ -1,16 +1,12 @@
 package View;
 import Controller.KeyPadController;
 import model.Board;
-import java.awt.image.BufferedImage;
-import javax.imageio.ImageIO;
-import java.io.IOException;
 
 import javax.swing.*;
 import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.io.File;
-import java.net.URL;
+
 
 public class TetrisFrame extends JFrame implements PropertyChangeListener {
     //private TetrisCanva tetrisCanva;
@@ -33,16 +29,6 @@ public class TetrisFrame extends JFrame implements PropertyChangeListener {
     private NextPieceCanva nextPieceCanva2;
     public Boolean coop = false;
     public Boolean versus = false;
-
-  //  @Override
-  //  public void update(Observable o, Object arg) {tetrisCanva.repaint();
-    //}
-
-
-    public TetrisFrame(Board board) throws HeadlessException {
-        this.board = board;
-    }
-
     public TetrisFrame() {
         board = new Board(20, 10);
         board.addPropertyChangeListener(this);

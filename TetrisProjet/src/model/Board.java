@@ -225,7 +225,7 @@ public class Board implements Runnable{
     } else if (direction.equals("Down")) {
         gameOver = stopAndCreateNewBrick();
         if(gameOver){
-            gameEnd(gameOver());
+            gameEnd();
         }
         updateNextPiece();
         checkAndClearFullRows();
@@ -246,40 +246,9 @@ public class Board implements Runnable{
         pcs.firePropertyChange("Score", oldScore, this.score);
         createNewBrick();
     }
-    /*public void displayBoard() {
-        // Afficher la grille de jeu
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                System.out.print(boardMatrix[i][j] == 0 ? "0" : boardMatrix[i][j]);
-            }
-            System.out.println("|");
-        }
-        System.out.println("_________________________");
-
-    }*/
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         pcs.addPropertyChangeListener(listener);
     }
-    public void removePropertyChangeListener(PropertyChangeListener listener) {
-        pcs.removePropertyChangeListener(listener);
-    }
-
-    public PropertyChangeListener[] getPropertyChangeListeners() {
-        return pcs.getPropertyChangeListeners();
-    }
-
-    public void addPropertyChangeListener(String propertyName, PropertyChangeListener listener) {
-        pcs.addPropertyChangeListener(propertyName, listener);
-    }
-
-    public void removePropertyChangeListener(String propertyName, PropertyChangeListener listener) {
-        pcs.removePropertyChangeListener(propertyName, listener);
-    }
-
-    public PropertyChangeListener[] getPropertyChangeListeners(String propertyName) {
-        return pcs.getPropertyChangeListeners(propertyName);
-    }
-
     public void deletePosition(int x,int y,int[][] brickMatrix){
         for (int i = 0; i < brickMatrix.length; i++) {
             for (int j = 0; j < brickMatrix[i].length; j++) {
@@ -362,7 +331,7 @@ public class Board implements Runnable{
         setToSleep(false);
     }
 
-    public void gameEnd(Boolean gameOver) {
+    public void gameEnd() {
         pcs.firePropertyChange("GameOver", null, null);
         System.out.println("Game Over");
         restartGame();

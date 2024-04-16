@@ -27,9 +27,4 @@ public class ScorePanel extends JPanel implements PropertyChangeListener {
             updateScore((int) e.getNewValue());
         }
     }
-
-
-    public String getScore() {
-        return scoreLabel.getText();
-    }
 }
