@@ -75,22 +75,6 @@ TetrisProjet/
 - **IDE** : IntelliJ IDEA (recommandé) ou tout autre IDE Java
 - **Système d'exploitation** : Windows, macOS, ou Linux
 
-## 🚀 Installation
-
-1. **Cloner ou télécharger le projet**
-   ```bash
-   cd /Users/timothelonguet/Documents/Tetris
-   ```
-
-2. **Ouvrir le projet dans IntelliJ IDEA**
-   - File → Open → Sélectionner le dossier `TetrisProjet`
-
-3. **Compiler le projet**
-   - Build → Build Project (ou `Cmd+F9` sur macOS, `Ctrl+F9` sur Windows/Linux)
-
-4. **Exécuter le jeu**
-   - Exécuter la classe `Test.java` (Run → Run 'Test' ou `Shift+F10`)
-
 ## 🎮 Utilisation
 
 ### Lancement
